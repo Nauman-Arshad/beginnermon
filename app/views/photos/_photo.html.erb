@@ -1,0 +1,19 @@
+<div id="<%= dom_id photo %>">
+  <p>
+    <strong>Content:</strong>
+    <%= photo.content %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <%= photo.user_id %>
+  </p>
+
+  <p>
+    Posted <%= time_tag photo.created_at, "data-local": "time-ago" %>
+  </p>
+  <p>
+    <strong><%= pluralize photo.comments.count, "comment" %></strong>
+  </p>
+
+</div>

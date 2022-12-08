@@ -1,0 +1,69 @@
+<div class="flex flex-col">
+  <div class="overflow-x-auto">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="border-b">
+          <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              User Name
+            </th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              User email
+            </th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              Status
+            </th>
+            <th>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @users.each do |u| %>
+            <% unless u.id == current_user&.id %>
+              <tr class="border-b">
+                <td class="font-normal text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  <%= u.username %>
+                </td>
+                <td class="font-normal text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  <%= u.email %>
+                </td>
+                <% if u.private? %>
+                  <td class="font-normal text-red-900 font-light px-6 py-4 whitespace-nowrap">
+                    Private
+                  </td>
+                <% else %>
+                  <td class="font-normal text-green-900 font-light px-6 py-4 whitespace-nowrap">
+                    Public
+                  </td>
+                <% end %>
+                <% if current_user&.following?(u) %>
+                  <td class="flex justify-center gap-1">
+                    <%= button_to "Unfollow", unfollow_path(u), class: "bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-md" %>
+                    <%= link_to "Show", profile_path(u), class: "bg-pink-300 hover:bg-pink-700 text-white py-2 px-4 rounded-md" %>
+                  </td>
+                <% elsif current_user&.sent_follow_request_to?(u) %>
+                  <td class="flex justify-center gap-1">
+                    <%= button_to "Cancel", cancel_path(u), class: "bg-yellow-500 hover:bg-yellow-700 text-white py-2 px-4 rounded-md" %>
+                    <%= link_to "Show", profile(u), class: "bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-md" %>
+                  </td>
+                <% else %>
+                  <td class="flex justify-center gap-1">
+                    <%= button_to "Follow", follow_path(u), class: "bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-md" %>
+                    <% if u.private? %>
+                      <%= button_to "Show", profile_path(u), disabled: true, class: "bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-md opacity-50" %>
+                    <% else %>
+                      <%= link_to "Show", profile_path(u), class: "bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-md" %>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_17_100857) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_08_074609) do
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "photo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_id"], name: "index_comments_on_photo_id"
+  end
+
   create_table "followability_relationships", force: :cascade do |t|
     t.string "followerable_type", null: false
     t.integer "followerable_id", null: false
@@ -23,6 +31,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_100857) do
     t.index ["followerable_type", "followerable_id"], name: "index_followability_relationships_on_followerable"
   end
 
+  create_table "photos", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_photos_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -31,8 +47,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_100857) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
+    t.boolean "private"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "photos"
+  add_foreign_key "photos", "users"
 end
