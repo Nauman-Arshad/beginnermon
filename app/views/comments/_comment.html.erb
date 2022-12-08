@@ -1,4 +1,6 @@
 <div id="<%= dom_id(comment) %>">
-  <%= comment.content %>
-  - <%= time_tag comment.created_at, "data-local": "time-ago" %>
+  <div id="toast-default" class="text-md items-center pt-4 pl-4 w-full max-w-xs text-black bg-white rounded-lg shadow m-2" role="alert">
+    <div class="text-mm font-normal pb-4"><%= comment.content %></div>
+    <p><%= time_tag comment.created_at, "data-local": "time-ago", class: " px-2 bg-indigo-100 text-indigo-800 text-xs font-semibold" %></p>
+  </div>
 </div>

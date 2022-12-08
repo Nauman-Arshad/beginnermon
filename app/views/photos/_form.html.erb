@@ -12,8 +12,12 @@
   <% end %>
 
   <div>
+    <%= form.label :image, style: "display: block" %>
+    <%= form.file_field :image, required: true %>
+  </div>
+  <div>
     <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, required: true %>
   </div>
   <%= form.hidden_field :user_id, value: current_user.id %>
   <div>

@@ -1,5 +1,7 @@
 <%= form_with model: [photo, Comment.new] do |form| %>
-  Your comment: <br>
-  <%= form.text_area :content, size: '20*5' %>
-  <%= form.submit %>
+  <div class="ml-2">
+    <p class="text-yellow-500">Your comment</p>
+    <%= form.text_area :content, class: "block  p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " %>
+    <%= form.submit 'Comment', class: " p-2 bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-md" %>
+  </div>
 <% end %>

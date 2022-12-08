@@ -1,19 +1,50 @@
-<div id="<%= dom_id photo %>">
-  <p>
-    <strong>Content:</strong>
-    <%= photo.content %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= photo.user_id %>
-  </p>
-
-  <p>
-    Posted <%= time_tag photo.created_at, "data-local": "time-ago" %>
-  </p>
-  <p>
-    <strong><%= pluralize photo.comments.count, "comment" %></strong>
-  </p>
-
+<div class="flex flex-col">
+  <div class="overflow-x-auto">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="border-b">
+          <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              Image
+            </th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              Author
+            </th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              Content
+            </th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              Publish
+            </th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+            </th>
+          </tr>
+          </thead>
+          <tbody id="<%= dom_id photo %>">
+          <tr class="border-b">
+            <% if photo.image.present? %>
+              <td class="font-normal text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <%= image_tag (photo.image_as_thumbnail) %>
+              </td>
+            <% end %>
+            <td class="font-normal text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              <%= photo.user_id %>
+            </td>
+            <td class="font-normal text-red-900 font-light px-6 py-4 whitespace-nowrap">
+              <%= photo.content %>
+            </td>
+            <td class="font-normal text-red-900 font-light px-6 py-4 whitespace-nowrap">
+              <%= time_tag photo.created_at, "data-local": "time-ago" %>
+            </td>
+            <td class="flex justify-center gap-1" style="margin-top: 100px">
+              <%= link_to "Show", photo, class: "bg-pink-300 hover:bg-pink-700 text-white py-2 px-4 rounded-md" %>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
