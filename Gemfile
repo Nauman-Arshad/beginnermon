@@ -74,3 +74,5 @@ end
 gem "followability", "~> 1.0"
 
 gem "devise", "~> 4.8"
+
+gem 'friendly_id', '~> 5.4.0'

@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:user]
 
   def home
   end
@@ -9,6 +9,6 @@ class PagesController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
   end
 end

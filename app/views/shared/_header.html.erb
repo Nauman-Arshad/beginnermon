@@ -20,7 +20,7 @@
         </li>
         <% if current_user %>
           <li>
-            <%= link_to current_user.username || current_user.email, edit_user_registration_path, class: "block py-2 pl-3 pr-4 text-blue-700 rounded hover:bg-blue-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-blue-400 md:dark:hover:text-white dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent" %>
+            <%= link_to "Profile", profile_path(current_user), class: "block py-2 pl-3 pr-4 text-blue-700 rounded hover:bg-blue-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-blue-400 md:dark:hover:text-white dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent" %>
           </li>
 
           <li>

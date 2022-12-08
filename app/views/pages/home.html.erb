@@ -11,6 +11,4 @@
     <%= link_to user.email, profile_path(user) %> is following you
     <%= button_to "Unfollow", unfollow_path(user) %>
   <% end %>
-<% else %>
-  <%= link_to "Log in", new_user_session_path %>
 <% end %>
