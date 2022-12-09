@@ -1,14 +1,17 @@
-<!--<p style="color: green"><%#= notice %></p>-->
-
-<%#= render @photo %>
-<div class="">
-  <%= image_tag (@photo.image_as_show)%>
+<div class="flex flex-col md:flex-row">
+  <div class="max-w-lg bg-white border border-gray-200 rounded-lg shadow-md m-auto w-full">
+    <%= image_tag (@photo.image_as_show) %>
+    <div class="p-5">
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><%= @photo.content %></p>
+      <div class="flex gap-1 py-5">
+        <%= link_to "Back", photos_path, class: "bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-md" %>
+        <%= link_to "Edit", edit_photo_path(@photo), class: "bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md" %>
+        <%= button_to "Delete", @photo, method: :delete, class: "bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-md" %>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md m-auto w-full p-4">
+    <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900"><%= pluralize @photo.comments.count, "comment" %></span>
+    <%= render "photos/comments", photo: @photo %>
+  </div>
 </div>
-<p class="text-md"><%= @photo.content %></p>
-<div class="flex gap-1 py-5">
-  <%= link_to "Back", photos_path, class: "bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-md"  %>
-  <%= link_to "Edit", edit_photo_path(@photo), class: "bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md"  %>
-  <%= button_to "Delete", @photo, method: :delete, class: "bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-md"  %>
-</div>
-<span class="bg-indigo-100 text-indigo-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900"><%= pluralize @photo.comments.count, "comment" %></span>
-<%= render "photos/comments", photo: @photo %>

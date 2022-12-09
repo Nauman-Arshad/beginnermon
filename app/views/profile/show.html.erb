@@ -1,9 +1,43 @@
-<h1><%= @user.email %></h1>
-<p>Find me in app/views/profile/show.html.erb</p>
-<% if current_user.following?(@user) %>
-  <%= button_to "Unfollow", unfollow_path(@user) %>
-<% elsif current_user.sent_follow_request_to?(@user)%>
-  <%= button_to "Cancel request", cancel_path(@user) %>
-<% else %>
-  <%= button_to "Follow",  follow_path(@user) %>
-<% end %>
+<div class="p-16">
+  <div class="p-8 bg-white shadow-lg mt-24 bg-gray-200">
+    <%= link_to "Back", users_path, class: "bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded-md", style: "float:right; margin-top:-26px;margin-right:-26px" %>
+    <div class="grid grid-cols-1 md:grid-cols-3">
+      <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
+        <div><p class="font-bold text-gray-700 text-xl"><%= @user.followers.count %></p>
+          <p class="text-gray-400">Followers</p></div>
+        <div><p class="font-bold text-gray-700 text-xl"><%= @user.followers.count %></p>
+          <p class="text-gray-400">Following</p></div>
+        <div><p class="font-bold text-gray-700 text-xl"><%= @user.photos.count %></p>
+          <p class="text-gray-400">Photos</p></div>
+      </div>
+      <div class="relative">
+        <div class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+      </div>
+      <div class="flex gap-5">
+        <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
+          <% if current_user.following?(@user) %>
+            <%= button_to "Unfollow", unfollow_path(@user), class: "text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5" %>
+          <% elsif current_user.sent_follow_request_to?(@user) %>
+            <%= button_to "Cancel request", cancel_path(@user), class: "text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5" %>
+          <% else %>
+            <%= button_to "Follow", follow_path(@user), class: "text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5" %>
+          <% end %>
+        </div>
+        <div class="mt-2">
+          <% if @user == current_user %>
+            <%= link_to "Edit", edit_user_registration_path, class: "text-white py-3 px-4 uppercase rounded bg-yellow-400 hover:bg-yellow-500 shadow hover:shadow-lg font-medium" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="mt-20 text-center border-b pb-12">
+      <h1 class="text-4xl font-medium text-gray-700">
+        <%= @user.username %>
+      </h1>
+      <p class="mt-2 text-gray-500"><%= @user.email %></p></div>
+  </div>
+</div>

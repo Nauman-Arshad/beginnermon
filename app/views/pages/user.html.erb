@@ -45,13 +45,13 @@
                 <% elsif current_user&.sent_follow_request_to?(u) %>
                   <td class="flex justify-center gap-1">
                     <%= button_to "Cancel", cancel_path(u), class: "bg-yellow-500 hover:bg-yellow-700 text-white py-2 px-4 rounded-md" %>
-                    <%= link_to "Show", profile(u), class: "bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-md" %>
+                    <%= link_to "Show", profile_path(u), class: "bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-md" %>
                   </td>
                 <% else %>
                   <td class="flex justify-center gap-1">
                     <%= button_to "Follow", follow_path(u), class: "bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-md" %>
                     <% if u.private? %>
-                      <%= button_to "Show", profile_path(u), disabled: true, class: "bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-md opacity-50" %>
+                      <%= link_to "Show", profile_path(u), disabled: true, class: "bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-md opacity-50" %>
                     <% else %>
                       <%= link_to "Show", profile_path(u), class: "bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-md" %>
                     <% end %>
